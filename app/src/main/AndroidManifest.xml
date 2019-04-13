@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
 </manifest>
