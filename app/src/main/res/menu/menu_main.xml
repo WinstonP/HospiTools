@@ -11,6 +11,12 @@
         android:title="@string/edit_patient"
         app:showAsAction="collapseActionView"
         />
+    <item
+        android:id="@+id/patient_data"
+        android:orderInCategory="100"
+        android:title="@string/add_patient_data"
+        app:showAsAction="collapseActionView"
+        />
 
     <item
         android:id="@+id/patient_delete"

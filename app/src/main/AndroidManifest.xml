@@ -21,6 +21,7 @@
         <activity android:name=".CreatePatient" />
         <activity android:name=".DeleteItemActivity" />
         <activity android:name=".EditItemActivity" />
+        <activity android:name=".AddDataActivity"/>
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

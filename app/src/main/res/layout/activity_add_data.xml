@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/Data_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/insert_patient_data"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/first_name_TV"/>
+
+    <TextView
+        android:id="@+id/first_name_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/first_name_ET"
+        app:layout_constraintTop_toBottomOf="@id/Data_TV"
+        app:layout_constraintBottom_toTopOf="@id/last_name_tv"
+         />
+    <EditText
+        android:id="@+id/first_name_ET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/first_name_TV"
+        app:layout_constraintTop_toBottomOf="@id/Data_TV"
+        app:layout_constraintBottom_toTopOf="@id/last_name_et" />
+
+    <TextView
+        android:id="@+id/last_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/last_name_et"
+        app:layout_constraintTop_toBottomOf="@id/first_name_TV"
+        app:layout_constraintBottom_toTopOf="@+id/hospital_name_tv"
+
+      />
+
+
+
+    <EditText
+        android:id="@+id/last_name_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@id/last_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/first_name_ET"
+        app:layout_constraintBottom_toTopOf="@+id/hospital_name_et"
+        />
+
+    <TextView
+        android:id="@+id/hospital_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hospital Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/hospital_name_et"
+        app:layout_constraintTop_toBottomOf="@id/last_name_tv"
+        app:layout_constraintBottom_toTopOf="@+id/procedure_tv"
+        />
+
+    <EditText
+        android:id="@+id/hospital_name_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@id/hospital_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/last_name_et"
+        app:layout_constraintBottom_toTopOf="@+id/procedure_et" />
+
+    <TextView
+        android:id="@+id/procedure_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Procedure"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/procedure_et"
+        app:layout_constraintTop_toBottomOf="@id/hospital_name_tv"
+        app:layout_constraintBottom_toTopOf="@id/waitTime_tv" />
+
+
+
+    <EditText
+        android:id="@+id/procedure_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@id/procedure_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hospital_name_et"
+        app:layout_constraintBottom_toTopOf="@+id/waitTime_et"
+         />
+
+    <TextView
+        android:id="@+id/waitTime_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estimated Wait Time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/waitTime_et"
+        app:layout_constraintTop_toBottomOf="@id/procedure_tv"
+        app:layout_constraintBottom_toTopOf="@id/Add_data" />
+
+
+
+    <EditText
+        android:id="@+id/waitTime_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@id/waitTime_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/procedure_et"
+        app:layout_constraintBottom_toTopOf="@+id/Add_data"
+        />
+
+    <Button
+        android:id="@+id/Add_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waitTime_et"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+    <Button
+        android:id="@+id/goBack_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_back"
+        app:layout_constraintTop_toBottomOf="@id/create_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="goBack"/>
+
+
+
+
+</android.support.constraint.ConstraintLayout>

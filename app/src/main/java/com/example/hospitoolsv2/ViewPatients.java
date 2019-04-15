@@ -80,6 +80,11 @@ public class ViewPatients extends AppCompatActivity {
 
         switch (id) {
 
+            case R.id.patient_data:
+                Intent addDataIntent = new Intent(this, AddDataActivity.class);
+                this.startActivity(addDataIntent);
+                return true;
+
             case R.id.patient_edit:
                 Intent editItemIntent = new Intent(this, EditItemActivity.class);
                 this.startActivity(editItemIntent);

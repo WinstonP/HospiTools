@@ -16,4 +16,10 @@
     <string name="edit_patient">Edit Patient</string>
     <string name="delete_patient">Delete Patient</string>
     <string name="location_permission_denied">User denied permission for device location.</string>
+    <string name="add_patient_data">Add Patient Data</string>
+    <string name="date_format">MM/DD/YYYY</string>
+    <string name="number_format">XXX-XXX-XXXX</string>
+
+
+
 </resources>
