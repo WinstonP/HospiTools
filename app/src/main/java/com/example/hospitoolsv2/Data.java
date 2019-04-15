@@ -7,19 +7,26 @@ public class Data {
     private String procedure;
     private String firstName;
     private String lastName;
+    private String waitTime;
 
-    public Data(int newDataID, String newFname, String newLname, String newHospital, String newProcedure){
+    public Data(int newDataID, String newFname, String newLname, String newHospital, String newProcedure, String newwaitTime) {
         setFname(newFname);
         setLname(newLname);
         setDataID(newDataID);
         setHospital(newHospital);
         setProcedure(newProcedure);
+        setWaitTime(newwaitTime);
     }
-    public void setFname(String newFname){
+
+    public void setWaitTime(String newwaitTime) {
+        waitTime = newwaitTime;
+    }
+
+    public void setFname(String newFname) {
         firstName = newFname;
     }
 
-    public void setLname(String newLname ){
+    public void setLname(String newLname) {
         lastName = newLname;
     }
 
@@ -29,33 +36,38 @@ public class Data {
     }
 
     public void setProcedure(String newProcedure) {
-        hospital = newProcedure;
+        procedure = newProcedure;
     }
 
     public void setDataID(int newDataID) {
         dataID = newDataID;
     }
-    public String getFirstName(){
+
+    public String getFirstName() {
         return firstName;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
-    public String getHospital(){
+    public String getHospital() {
         return hospital;
     }
 
-    public String getProcedure(){
+    public String getWaitTime() {
+        return waitTime;
+    }
+
+    public String getProcedure() {
         return procedure;
     }
 
-    public String getDataID(){
+    public String getDataID() {
         return getDataID();
     }
 
-    public String toString(){
-        return "ID: " + dataID + "\nName:" + firstName + " " + lastName + "\nHospital" + hospital + "\nProcedure" +procedure;
+    public String toString() {
+        return "ID: " + dataID + "\nName:" + firstName + " " + lastName + "\nHospital: " + hospital + "\nProcedure: " + procedure + "\nWait Time: " + waitTime;
     }
 }

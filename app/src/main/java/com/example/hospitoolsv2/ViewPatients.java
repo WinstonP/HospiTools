@@ -79,6 +79,10 @@ public class ViewPatients extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id) {
+            case R.id.view_data:
+                Intent viewData = new Intent(this, ViewData.class);
+                this.startActivity(viewData);
+                return true;
 
             case R.id.patient_data:
                 Intent addDataIntent = new Intent(this, AddDataActivity.class);

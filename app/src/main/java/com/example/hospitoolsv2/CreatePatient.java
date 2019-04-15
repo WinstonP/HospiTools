@@ -37,7 +37,7 @@ public class CreatePatient extends AppCompatActivity {
 
         try {
             Patient patient = new Patient(0, firstName, lastName, number, gender, dateOfBirth, email);
-            databaseManager.insert(patient);
+            databaseManager.insertPatient(patient);
             Toast.makeText(this, "Patient Created", Toast.LENGTH_SHORT).show();
         } catch (NumberFormatException nfe) {
 
