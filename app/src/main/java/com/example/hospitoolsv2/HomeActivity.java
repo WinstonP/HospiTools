@@ -56,11 +56,19 @@ Button family_BTN;
             }
         });
 
+/*
         view_patient_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent view_patient = new Intent(HomeActivity.this,ViewPatients.class);
                 HomeActivity.this.startActivity(view_patient);
+            }
+        });*/
+        view_patient_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent login = new Intent(HomeActivity.this,LoginActivity.class);
+                HomeActivity.this.startActivity(login);
             }
         });
     }

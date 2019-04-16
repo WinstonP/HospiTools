@@ -1,6 +1,9 @@
 package com.esri.arcgisruntime.findplaces;
 
 import android.Manifest;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,15 +12,20 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
 import com.esri.arcgisruntime.geometry.Point;
+import com.esri.arcgisruntime.loadable.LoadStatus;
 import com.esri.arcgisruntime.mapping.ArcGISMap;
 import com.esri.arcgisruntime.mapping.Basemap;
 import com.esri.arcgisruntime.mapping.view.Callout;
@@ -31,6 +39,7 @@ import com.esri.arcgisruntime.mapping.view.ViewpointChangedEvent;
 import com.esri.arcgisruntime.mapping.view.ViewpointChangedListener;
 import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
 import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
+import com.esri.arcgisruntime.symbology.TextSymbol;
 import com.esri.arcgisruntime.tasks.geocode.GeocodeParameters;
 import com.esri.arcgisruntime.tasks.geocode.GeocodeResult;
 import com.esri.arcgisruntime.tasks.geocode.LocatorTask;
@@ -49,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
     private GraphicsOverlay graphicsOverlay;
     private LocatorTask locator = new LocatorTask("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
     private Spinner spinner;
+    private SearchView mSearchView = null;
+    private GraphicsOverlay mGraphicsOverlay;
+    private LocatorTask mLocatorTask = null;
+    private GeocodeParameters mGeocodeParameters = null;
 
 
     private void setupMap() {
@@ -208,6 +221,56 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private void queryLocator(final String query) {
+        if (query != null && query.length() > 0) {
+            mLocatorTask.cancelLoad();
+            final ListenableFuture<List<GeocodeResult>> geocodeFuture = mLocatorTask.geocodeAsync(query, mGeocodeParameters);
+            geocodeFuture.addDoneListener(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        List<GeocodeResult> geocodeResults = geocodeFuture.get();
+                        if (geocodeResults.size() > 0) {
+                            displaySearchResult(geocodeResults.get(0));
+                        } else {
+                            Toast.makeText(getApplicationContext(), getString(R.string.nothing_found) + " " + query, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (InterruptedException | ExecutionException e) {
+                        // ... determine how you want to handle an error
+                    }
+                    geocodeFuture.removeDoneListener(this); // Done searching, remove the listener.
+                }
+            });
+        }
+    }
+    private void displaySearchResult(GeocodeResult geocodedLocation) {
+        String displayLabel = geocodedLocation.getLabel();
+        TextSymbol textLabel = new TextSymbol(18, displayLabel, Color.rgb(192, 32, 32), TextSymbol.HorizontalAlignment.CENTER, TextSymbol.VerticalAlignment.BOTTOM);
+        Graphic textGraphic = new Graphic(geocodedLocation.getDisplayLocation(), textLabel);
+        Graphic mapMarker = new Graphic(geocodedLocation.getDisplayLocation(), geocodedLocation.getAttributes(),
+                new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.SQUARE, Color.rgb(255, 0, 0), 12.0f));
+        ListenableList allGraphics = mGraphicsOverlay.getGraphics();
+        allGraphics.clear();
+        allGraphics.add(mapMarker);
+        allGraphics.add(textGraphic);
+        mMapView.setViewpointCenterAsync(geocodedLocation.getDisplayLocation());
+    }
+    private void setupLocator() {
+        String locatorService = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
+        mLocatorTask = new LocatorTask(locatorService);
+        mLocatorTask.addDoneLoadingListener(() -> {
+            if (mLocatorTask.getLoadStatus() == LoadStatus.LOADED) {
+                mGeocodeParameters = new GeocodeParameters();
+                mGeocodeParameters.getResultAttributeNames().add("*");
+                mGeocodeParameters.setMaxResults(1);
+                mGraphicsOverlay = new GraphicsOverlay();
+                mMapView.getGraphicsOverlays().add(mGraphicsOverlay);
+            } else if (mSearchView != null) {
+                mSearchView.setEnabled(false);
+            }
+        });
+        mLocatorTask.loadAsync();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,7 +278,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mMapView = findViewById(R.id.mapView);
         setupMap();
+        setupLocator();
         setupLocationDisplay();
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        MenuItem searchMenuItem = menu.findItem(R.id.search);
+        if (searchMenuItem != null) {
+            mSearchView = (SearchView) searchMenuItem.getActionView();
+            if (mSearchView != null) {
+                SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+                mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+                mSearchView.setIconifiedByDefault(false);
+            }
+        }
+        return true;
     }
 
     @Override
@@ -249,4 +329,12 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, getResources().getString(R.string.location_permission_denied), Toast.LENGTH_SHORT).show();
         }
     }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            queryLocator(intent.getStringExtra(SearchManager.QUERY));
+        }
+    }
+
 }

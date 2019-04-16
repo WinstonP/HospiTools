@@ -20,4 +20,5 @@
         android:entries="@array/categories_array"
         android:popupBackground="#fbfafa"
         tools:popupBackground="@android:color/background_light" />
+
 </RelativeLayout>
