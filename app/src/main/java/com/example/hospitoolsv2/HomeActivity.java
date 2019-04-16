@@ -15,6 +15,8 @@ public class HomeActivity extends AppCompatActivity {
 Button create_Patient_BTN;
 Button view_patient_BTN;
 Button find_hospitals_BTN;
+Button family_BTN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,15 @@ Button find_hospitals_BTN;
         create_Patient_BTN = findViewById(R.id.create_btn);
         view_patient_BTN = findViewById(R.id.view_btn);
         find_hospitals_BTN = findViewById(R.id.find_Hospital);
+        family_BTN = findViewById(R.id.family_btn);
+
+        family_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent family = new Intent(HomeActivity.this,FamilyOptions.class);
+                HomeActivity.this.startActivity(family);
+            }
+        });
 
 
 

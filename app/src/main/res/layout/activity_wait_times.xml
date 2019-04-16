@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WaitTimes">
+
+    <TextView
+        android:id="@+id/waitTimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected Hospital and Procedure"
+        android:gravity="center"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/hospitals_spinner"/>
+
+        \/>
+    <Spinner
+        android:id="@+id/hospitals_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/procedures_spinner"
+        app:layout_constraintTop_toBottomOf="@id/waitTimes"
+        app:layout_constraintBottom_toTopOf="@+id/WT_TV"
+        ></Spinner>
+
+    <Spinner
+        android:id="@+id/procedures_spinner"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/hospitals_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waitTimes"
+        app:layout_constraintBottom_toTopOf="@+id/WT_ET"
+        ></Spinner>
+
+    <TextView
+        android:id="@+id/WT_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The Estimated Wait Time is: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/WT_ET"
+        app:layout_constraintTop_toBottomOf="@id/hospitals_spinner"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <EditText
+        android:id="@+id/WT_ET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="8"
+        app:layout_constraintStart_toEndOf="@id/WT_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/procedures_spinner"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -19,7 +19,28 @@
     <string name="add_patient_data">Add Patient Data</string>
     <string name="date_format">MM/DD/YYYY</string>
     <string name="number_format">XXX-XXX-XXXX</string>
+    
+    
+    <string-array name="Hospitals">
+        <item>Touro</item>
+        <item>Oschner</item>
+        <item>University</item>
+    </string-array>
 
+
+    <string-array name="Procedures">
+        <item>Headache</item>
+        <item>Foreign Object</item>
+        <item>Skin Infection</item>
+        <item>Back Pain</item>
+        <item>Cuts and Contusions</item>
+        <item>Upper Respiratory Infection</item>
+        <item>Broken Bones and Sprains</item>
+        <item>Touthaches</item>
+        <item>Abdominal Pain</item>
+        <item>Chest Pain</item>
+
+    </string-array>
 
 
 </resources>

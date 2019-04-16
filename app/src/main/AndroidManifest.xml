@@ -17,12 +17,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".WaitTimes"></activity>
+        <activity android:name=".FamilyOptions" />
         <activity android:name=".ViewPatients" />
-        <activity android:name=".ViewData"/>
+        <activity android:name=".ViewData" />
         <activity android:name=".CreatePatient" />
         <activity android:name=".DeleteItemActivity" />
-        <activity android:name=".EditItemActivity" />
-        <activity android:name=".AddDataActivity"/>
+        <activity android:name=".EditItemActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".AddDataActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,10 +36,10 @@
         <activity android:name="com.esri.arcgisruntime.findplaces.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>

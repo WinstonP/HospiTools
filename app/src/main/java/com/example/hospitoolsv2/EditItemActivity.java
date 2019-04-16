@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class EditItemActivity extends AppCompatActivity {
     DatabaseManager db;
 
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DatabaseManager(this);
         updateView();
@@ -26,17 +26,17 @@ public class EditItemActivity extends AppCompatActivity {
 
     public void updateView() {
         ArrayList<Patient> patients = db.selectAll();
-        if(patients.size() > 0){
+        if (patients.size() > 0) {
 
             ScrollView scrollView = new ScrollView(this);
             GridLayout gridLayout = new GridLayout(this);
             gridLayout.setRowCount(patients.size());
-            gridLayout.setColumnCount(7);
+            gridLayout.setColumnCount(8);
 
 
-            TextView [] ids = new TextView[patients.size()];
-            EditText [][] patientInfo = new EditText[patients.size()][6];
-            Button [] buttons = new Button[patients.size()];
+            TextView[] ids = new TextView[patients.size()];
+            EditText[][] patientInfo = new EditText[patients.size()][6];
+            Button[] buttons = new Button[patients.size()];
             ButtonHandler bh = new ButtonHandler();
 
             Point size = new Point();
@@ -45,46 +45,55 @@ public class EditItemActivity extends AppCompatActivity {
 
             int i = 0;
 
-            for(Patient patient : patients){
+            for (Patient patient : patients) {
 
                 ids[i] = new TextView(this);
-                ids[i].setGravity(Gravity.CENTER);
-                ids[i].setText(" "+patient.getId());
+                ids[i].setGravity(Gravity.LEFT);
+                ids[i].setTextSize(10);
+                ids[i].setText("" + patient.getId());
 
                 patientInfo[i][0] = new EditText(this);
-                patientInfo[i][1] =new EditText(this);
+                patientInfo[i][1] = new EditText(this);
                 patientInfo[i][2] = new EditText(this);
-                patientInfo[i][3] =new EditText(this);
+                patientInfo[i][3] = new EditText(this);
                 patientInfo[i][4] = new EditText(this);
-                patientInfo[i][5] =new EditText(this);
+                patientInfo[i][5] = new EditText(this);
 
                 patientInfo[i][0].setText(patient.getFirstName());
-                patientInfo[i][1].setText(" "+ patient.getLastName());
-                patientInfo[i][2].setText(" "+ patient.getNumber());
-                patientInfo[i][3].setText(" "+ patient.getGender());
-                patientInfo[i][4].setText(" "+ patient.getDateOfBirth());
-                patientInfo[i][5].setText(" "+ patient.getEmail());
+                patientInfo[i][0].setTextSize(10);
+                patientInfo[i][1].setText("" + patient.getLastName());
+                patientInfo[i][1].setTextSize(10);
+                patientInfo[i][2].setText("" + patient.getNumber());
+                patientInfo[i][2].setTextSize(10);
+                patientInfo[i][3].setText("" + patient.getGender());
+                patientInfo[i][3].setTextSize(10);
+                patientInfo[i][4].setText("" + patient.getDateOfBirth());
+                patientInfo[i][4].setTextSize(10);
+                patientInfo[i][5].setText("" + patient.getEmail());
+                patientInfo[i][5].setTextSize(10);
 
-                patientInfo[i][0].setId(10* patient.getId());
-                patientInfo[i][1].setId(10* patient.getId()+1);
-                patientInfo[i][2].setId(10* patient.getId()+2);
-                patientInfo[i][3].setId(10* patient.getId()+3);
-                patientInfo[i][4].setId(10* patient.getId()+4);
-                patientInfo[i][5].setId(10* patient.getId()+5);
+                patientInfo[i][0].setId(10 * patient.getId());
+                patientInfo[i][1].setId(10 * patient.getId() + 1);
+                patientInfo[i][2].setId(10 * patient.getId() + 2);
+                patientInfo[i][3].setId(10 * patient.getId() + 3);
+                patientInfo[i][4].setId(10 * patient.getId() + 4);
+                patientInfo[i][5].setId(10 * patient.getId() + 5);
 
                 buttons[i] = new Button(this);
-                buttons[i].setText("Update Patient");
+                buttons[i].setText("Update \n" + patient.getFirstName());
                 buttons[i].setId(patient.getId());
 
                 buttons[i].setOnClickListener(bh);
 
-                gridLayout.addView(ids[i], width/10, ViewGroup.LayoutParams.WRAP_CONTENT);
-                gridLayout.addView(patientInfo[i][0],(int)(width * .10), ViewGroup.LayoutParams.WRAP_CONTENT);
-                gridLayout.addView(patientInfo[i][1],(int)(width * .10), ViewGroup.LayoutParams.WRAP_CONTENT);
-                gridLayout.addView(patientInfo[i][2],(int)(width * .10), ViewGroup.LayoutParams.WRAP_CONTENT);
-                gridLayout.addView(patientInfo[i][3],(int)(width * .10), ViewGroup.LayoutParams.WRAP_CONTENT);
-                gridLayout.addView(patientInfo[i][4],(int)(width * .10), ViewGroup.LayoutParams.WRAP_CONTENT);
-                gridLayout.addView(patientInfo[i][5],(int)(width * .10), ViewGroup.LayoutParams.WRAP_CONTENT);
+                gridLayout.addView(ids[i], (int) (width * .025), ViewGroup.LayoutParams.WRAP_CONTENT);
+                gridLayout.addView(patientInfo[i][0], (int) (width * .12), ViewGroup.LayoutParams.WRAP_CONTENT);
+                gridLayout.addView(patientInfo[i][1], (int) (width * .12), ViewGroup.LayoutParams.WRAP_CONTENT);
+                gridLayout.addView(patientInfo[i][2], (int) (width * .12), ViewGroup.LayoutParams.WRAP_CONTENT);
+                gridLayout.addView(patientInfo[i][3], (int) (width * .08), ViewGroup.LayoutParams.WRAP_CONTENT);
+                gridLayout.addView(patientInfo[i][4], (int) (width * .11), ViewGroup.LayoutParams.WRAP_CONTENT);
+                gridLayout.addView(patientInfo[i][5], (int) (width * .18), ViewGroup.LayoutParams.WRAP_CONTENT);
+                gridLayout.addView(buttons[i], (int) (width * .20), ViewGroup.LayoutParams.WRAP_CONTENT);
+
 
                 i++;
 
@@ -95,15 +104,15 @@ public class EditItemActivity extends AppCompatActivity {
 
     }
 
-    private  class  ButtonHandler implements  View.OnClickListener{
-        public void onClick(View view){
+    private class ButtonHandler implements View.OnClickListener {
+        public void onClick(View view) {
             int patientID = view.getId();
-            EditText firstNameEdit = findViewById(10*patientID);
-            EditText lastNameEdit = findViewById(10*patientID + 1);
-            EditText numberEdit = findViewById(10*patientID + 2);
-            EditText genderEdit = findViewById(10*patientID + 3);
-            EditText dobEdit = findViewById(10*patientID + 4);
-            EditText emailEdit = findViewById(10*patientID + 5);
+            EditText firstNameEdit = findViewById(10 * patientID);
+            EditText lastNameEdit = findViewById(10 * patientID + 1);
+            EditText numberEdit = findViewById(10 * patientID + 2);
+            EditText genderEdit = findViewById(10 * patientID + 3);
+            EditText dobEdit = findViewById(10 * patientID + 4);
+            EditText emailEdit = findViewById(10 * patientID + 5);
 
             String firstName = firstNameEdit.getText().toString();
             String lastName = lastNameEdit.getText().toString();
@@ -112,8 +121,13 @@ public class EditItemActivity extends AppCompatActivity {
             String dob = dobEdit.getText().toString();
             String email = emailEdit.getText().toString();
 
-            db.updateById(patientID,firstName,lastName,number,gender, dob,email);
-            Toast.makeText(EditItemActivity.this, "Patient Updated", Toast.LENGTH_SHORT).show();
+            try {
+                db.updateById(patientID, firstName, lastName, number, gender, dob, email);
+                Toast.makeText(EditItemActivity.this, "Patient Updated", Toast.LENGTH_SHORT).show();
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(EditItemActivity.this, "Patient Not Updated", Toast.LENGTH_SHORT).show();
+            }
+
 
             updateView();
 
