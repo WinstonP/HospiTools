@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 Boolean res = db.checkUser(user, pwd);
                 if(res == true)
                 {
-                    Intent HomePage = new Intent(LoginActivity.this,HomeActivity.class);
+                    Intent HomePage = new Intent(LoginActivity.this,ViewPatients.class);
                     startActivity(HomePage);
                 }
                 else
