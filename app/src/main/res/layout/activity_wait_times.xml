@@ -56,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="8"
+        android:enabled="false"
         app:layout_constraintStart_toEndOf="@id/WT_TV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/procedures_spinner"
