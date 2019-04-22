@@ -78,7 +78,7 @@ public class Patient {
     }
 
     public String toString(){
-        return "ID: "+id + "\nName:" + firstName + " "+ lastName + "\nNumber: " + number + "\nGender: " + gender + "\nDoB: " + dateOfBirth + "\nEmail: " + email;
+        return "\nName:" + firstName + " "+ lastName + "\nNumber: " + number + "\nGender: " + gender + "\nDoB: " + dateOfBirth + "\nEmail: " + email;
     }
 }
 

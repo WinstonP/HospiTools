@@ -35,6 +35,8 @@
         <activity android:name=".ViewData" />
         <activity android:name=".CreatePatient" />
         <activity android:name=".DeleteItemActivity" />
+        <activity android:name=".DataEditor"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".EditItemActivity"
             android:screenOrientation="landscape" />

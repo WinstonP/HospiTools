@@ -24,6 +24,13 @@
         android:title="View Patient Data"
         app:showAsAction="collapseActionView"
         />
+
+    <item
+        android:id="@+id/edit_data"
+        android:orderInCategory="100"
+        android:title="Edit Patient Data"
+        app:showAsAction="collapseActionView"
+        />
     <item
         android:id="@+id/patient_delete"
         android:orderInCategory="100"

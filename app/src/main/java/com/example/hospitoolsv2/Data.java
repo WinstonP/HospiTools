@@ -63,11 +63,11 @@ public class Data {
         return procedure;
     }
 
-    public String getDataID() {
-        return getDataID();
+    public int getDataID() {
+        return dataID;
     }
 
     public String toString() {
-        return "ID: " + dataID + "\nName:" + firstName + " " + lastName + "\nHospital: " + hospital + "\nProcedure: " + procedure + "\nWait Time: " + waitTime;
+        return "\nName:" + firstName + " " + lastName + "\nHospital: " + hospital + "\nProcedure: " + procedure + "\nWait Time: " + waitTime;
     }
 }

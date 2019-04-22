@@ -124,6 +124,21 @@ public class DatabaseManager extends SQLiteOpenHelper {
         database.close();
     }
 
+    public void updateDataById(int id, String firstName, String lastName, String hospital, String procedure, String waitTime) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        String sqlUpdate = "update " + TABLE_DATA;
+        sqlUpdate += " set " + FIRST + " = '" + firstName + "', ";
+        sqlUpdate += LAST + " = '" + lastName + "', ";
+        sqlUpdate += HOSPITAL + " = '" + hospital + "', ";
+        sqlUpdate += PROCEDURE + " = '" + procedure + "', ";
+        sqlUpdate += WAITTIME + " = '" + waitTime + "' ";
+        sqlUpdate += " where " + ID + " = " + id;
+
+        database.execSQL(sqlUpdate);
+        database.close();
+    }
+
     public ArrayList<Patient> selectAll() {
         String sqlQuery = String.format(Locale.US,
                 "select * from %s", TABLE_PATIENT);
@@ -180,9 +195,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return data;
     }
 
-    public Patient selectByID(int id) {
-        String sqlQuery = "select * from " + TABLE_PATIENT;
-        sqlQuery += " where " + ID + " = " + id;
+    public Patient selectByName(int firstName) {
+        String sqlQuery = "select * from " + TABLE_DATA;
+        sqlQuery += " where " + FIRST + " = " + firstName;
 
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(sqlQuery, null);
